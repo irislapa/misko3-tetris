@@ -45,7 +45,7 @@ you will have to change the path in the makefile,
 ```bash
 sudo tar -xvjf /Downloads/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 -C /usr/share
 ```
-After that you will be required to create soft-links to the binaries so that project can compile:
+After that you will be required to create soft-links to the binaries so that make can execute them and compile:
 ```bash
 cd /usr/bin
 sudo ln -s /usr/share/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc arm-none-eabi-gcc 
@@ -54,10 +54,11 @@ sudo ln -s /usr/share/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc arm-n
 
 To flash the board you will need to install the stlink tool, you can do so by cloning or downloading the [repo](https://github.com/stlink-org/stlink):
 
-You want to extract/instal the contents of repo to /usr/local/share/stlink.
+You want to extract/instal the contents of repo to /usr/local/share/stlink:
 ```bash
 sudo mv /Downloads/stlink-1.8.0 /usr/local/share/stlink
 ```
+Or adjust the hardcoded paths in launch and settings.json.
 
 Then run the following commands:
 ```bash
@@ -70,21 +71,22 @@ Now that the stlink is buit, you want create the following soft-links:
 sudo ln -s /usr/local/share/stlink-1.8.0/bin/st-flash st-flash # for flashing the board
 sudo ln -s /usr/local/share/stlink-1.8.0/bin/st-util st-util # in case you want to debug the board
 ```
-If you plan on debugging you might need to install some additional libraries and vscode extensions, 
-first try executing the binary file and see if it throws any errors, which should provide a solution.
+If you plan on debugging you will need to install vscode extensions and might need to install some additional libraries, 
+first try executing the gdb-server binary file and see if it throws any errors, which should tell you what is wrong.
 In the terminal type in the previously created softlink and run it.
 ```bash
 gcc-arm-none-eabi-gdb
 ```
-The vscode you would want are:
-- For syntax highliting and intellisense and such: [c/cpp tools](https://code.visualstudio.com/docs/languages/cpp)
+
+The vscode extension you want are:
+- For syntax highliting, intellisense and such: [c/cpp tools](https://code.visualstudio.com/docs/languages/cpp)
 - For debugging: [cortex-debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug)
-- For using the virual com port: [serial monitor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-serial-monitor)
+- For using the virual com port: [serial monitor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-serial-monitor), the _write syscall redirects the string to uart registers, so you can just use printf() statements.
 
 To use the generate code and gui setup feature from cubeIDE, you can install the [CubeMX](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) vscode extension.
 
 You are now all set for running and debugging the project.
-I have added tasks for convenience, press ctrl+shift+p, select "Tasks: Run Task" and choose the task you want to run.
+I have added tasks to conveniently build and flash the project, press ctrl+shift+p, select "Tasks: Run Task" and choose the task you want to run.
 Or you can also just type:
 ```bash
 make # only build
@@ -93,11 +95,11 @@ make stflash # build and flash
 If the build and/or flash is succesful, a green message will be printed in the terminal.
 
 ### CubeIDE
-I didn't use windows for this project, so i can't provide a guide to a working vscode setup on Windows, but you can still resort to using CubeIDE.
-You will have to first install CubeMX and convert the toolchain/IDE configuration from makefile to STM32CubeIDE.
+I didn't use windows for this project, so i can't provide a guide to a working vscode setup on Windows, but you can still resort to using [CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html).
+You will have to first install [CubeMX](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and convert the toolchain/IDE configuration from makefile to STM32CubeIDE.
 You can do so by opening the project in CubeMX and under Project Manager -> Project -> Toolchain/IDE select STM32CubeIDE.
 ![](/images/image.png)
-Now you can flash and debug the project using the CubeIDE.
+Now you can flash and debug the project using CubeIDE.
 
 
 
