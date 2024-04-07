@@ -33,7 +33,7 @@ If you happen to be in possesion of the board and want to run the game on it, yo
 
 clone the repository:
 ```bash 
-git clone <repo name>
+git clone https://github.com/irislapa/misko3-tetris.git
 ```
 #### Linux (Ubuntu)
 ```bash
