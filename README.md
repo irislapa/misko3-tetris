@@ -18,8 +18,8 @@ You can watch the filmed demo on [youtube](https://www.youtube.com/watch?v=OU4xc
     - [Main loop](#main-loop)
   - [Future plans](#future-plans)
 
-[br /]
-[br /]
+//
+//
 
 ## Miško3 Board
 
