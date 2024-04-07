@@ -52,6 +52,7 @@ Core/Src/tetromino.c \
 Core/Src/joystick.c \
 Core/Src/stm32g4xx_it.c \
 Core/Src/stm32g4xx_hal_msp.c \
+Core/Src/tetris_game.c \
 USB_Device/App/usb_device.c \
 USB_Device/App/usbd_desc.c \
 USB_Device/App/usbd_cdc_if.c \

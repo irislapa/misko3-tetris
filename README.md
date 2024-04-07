@@ -8,12 +8,11 @@ This is a repository for a simple Tetris game implemented in C programming langu
   - [Table of Contents](#table-of-contents)
   - [Miško3 Board](#miško3-board)
   - [Setup](#setup)
-    - [vscode](#vscode)
+    - [VS Code](#vs-code)
       - [Linux (Ubuntu)](#linux-ubuntu)
     - [CubeIDE](#cubeide)
   - [Overview](#overview)
     - [Tetris piece aka. Tetromino](#tetris-piece-aka-tetromino)
-    - [Field array](#field-array)
     - [Collisions](#collisions)
     - [Main loop](#main-loop)
   - [Future plans](#future-plans)
@@ -21,15 +20,15 @@ This is a repository for a simple Tetris game implemented in C programming langu
 
 ## Miško3 Board
 
-The board was developed by students and professors at the Faculty of Electrical Engineering in Ljubljana, Slovenia. 
-And as far as i know produced by [iSYSTEM labs](https://www.isystemlabs.si/).
-You can find documentation and more information about the board on the [github repo](https://github.com/mjankovec/MiSKo3.git) 
+The board was developed by students and professors at the [Faculty of Electrical Engineering](https://fe.uni-lj.si/en/) in Ljubljana, Slovenia. 
+And as far as i know was produced by [iSYSTEM labs](https://www.isystemlabs.si/).
+You can find documentation and more information about the board on [github repo](https://github.com/mjankovec/MiSKo3.git) 
 
 ## Setup
 
-If you happen to be in possesion of the board and want to run the game on it, you can follow the steps bellow.
+If you happen to be in possesion of the board and want to run the game on it, you can follow the steps bellow, to setup the vscode environment or set the configuration to run with CubeIDE.
 
-### vscode 
+### VS Code 
 
 clone the repository:
 ```bash 
@@ -111,15 +110,14 @@ The goal is to complete horizontal lines without gaps.
 I used the demo project from [repo](https://github.com/LAPSyLAB/Misko3_Docs_and_Projects.git), to build on, since it already has the necessary dirver implementations.
 
 The game logic is based on the classic Tetris rules:
-
 - Tetrominoes fall from the top of the playfield
 - Player then moves and rotate tetrominoes to fit them into gaps
-- Completing horizontal lines without gaps clears the line and awards points
-- The game ends when the stack of tetrominoes reaches the top of the playfield
+- The completed line is colored gold
+- The amount of points is calculated based on the number of lines filled 
 
 
 ### Tetris piece aka. Tetromino
-A tetromino can easily be represented as a 4x4 matrix, where each element is a boolean value, indicating if the cell is occupied or not.
+A tetromino can easily be represented as a 4x4 matrix, where each array element is a boolean value, indicating if the cell is occupied or not.
 The 
 ```c
 typedef struct {
@@ -149,19 +147,42 @@ int rotateTetromino(int x, int y, int r) {
   return 0;
 }
 ```
-
+When iterating through tetromino array, the function will return the index coreesponding to the rotation.
 ![](images/Untitled%20Diagram.drawio.png)
 
-### Field array
-
-
 ### Collisions
+The playfield is a [35x25] matrix, where 10x10 pixels are used to display each tetromino cell.
+When a tetromino "lands" on the ground, the cells are copied to the field array.
+![](images/collisions.png)
 
+To caclulate collisions, the function iterates over the tetromino array and checks if the cell and the field are both occupied.
 
+```c
+int collisions(Tetromino t, int tx, int ty, int rotation) {
+  for (int y = 0; y < 4; y++) {
+    for (int x = 0; x < 4; x++) {
+      uint16_t tValue = t.grid[rotateTetromino(x, y, rotation)];
+      int fieldIndex = (ty + y) * 34 + (tx + x);
+      if (tx+x >= 0 && tx+x < 34) {
+        if (ty + y >= 0 && ty + y < 25) {
+          if (tValue != 0 && fieldArray[fieldIndex] != 0) {
+            // we get collision
+            return 1;
+					}
+        }
+      }
+    }
+  }
+  return 0;
+}
+
+```
 ### Main loop
 
+The main loop has 3 game states: start, game and game over.
+The game loop checks user input, updates tetris rotation and position, checks for collisions and displays the new frame. The game loop, along with other funtions is implemented in tetris_game.c file.
 
 ## Future plans
 
-- For the future i plan to implement the project with freeRTOS, and configure user interface with system interrupts, since the current implementation is laggy and not well optimized. 
+- I intend to implement the project with freeRTOS, and configure user interface with system interrupts, since the current implementation is laggy and not well optimized. 
 - Make the graphics prettier and more appealing.

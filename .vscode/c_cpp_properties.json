@@ -9,6 +9,8 @@
                 "${workspaceRoot}/Drivers/STM32G4xx_HAL_Driver/Inc/Legacy",
                 "${workspaceRoot}/Drivers/CMSIS/Include",
                 "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32G4xx/Include",
+                "${workspaceRoot}/Drivers/external",
+                "${workspaceRoot}/System/Include",
                 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include",
                 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/c++/10.3.1",
                 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include",
