@@ -44,7 +44,7 @@ sudo apt-get install cmake # for building stlink
 ```
 Download the [arm toolchain](https://developer.arm.com/downloads/-/gnu-rm) archive for your system.
 The workspace path is set up for it to be installed in /usr/share, you can install it elsewhere but,
-you will have to change the path in the makefile, 
+you will have to change the hardcoded path in the .json files, 
 ```bash
 sudo tar -xvjf /Downloads/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 -C /usr/share
 ```
