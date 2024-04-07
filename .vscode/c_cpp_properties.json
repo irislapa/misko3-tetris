@@ -1,0 +1,43 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceRoot}",
+                "${workspaceRoot}/Core/Inc",
+                "${workspaceRoot}/Drivers/STM32G4xx_HAL_Driver/Inc",
+                "${workspaceRoot}/Drivers/STM32G4xx_HAL_Driver/Inc/Legacy",
+                "${workspaceRoot}/Drivers/CMSIS/Include",
+                "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32G4xx/Include",
+                "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include",
+                "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/c++/10.3.1",
+                "/usr/share/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include",
+                "/usr/share/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include-fixed",
+                "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine",
+                "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys",
+                "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/newlib-nano"
+            ],
+            "defines": [
+                "USE_HAL_DRIVER",
+                "STM32H750xx"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "linux-gcc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "Core/Inc",
+                    "Drivers/CMSIS/Include",
+                    "Drivers/CMSIS/Device/ST/STM32G4xx/Include",
+                    "Drivers/STM32G4xx_HAL_Driver/Inc",
+                    "Drivers/STM32G4xx_HAL_Driver/Inc/Legacy"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db"
+            },
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc"
+        }
+    ],
+    "version": 4
+}

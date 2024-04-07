@@ -1,0 +1,615 @@
+ARM GAS  /tmp/ccNZ5cmI.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"tetromino.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.rotateTetromino,"ax",%progbits
+  20              		.align	1
+  21              		.global	rotateTetromino
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	rotateTetromino:
+  27              	.LVL0:
+  28              	.LFB329:
+  29              		.file 1 "Core/Src/tetromino.c"
+   1:Core/Src/tetromino.c **** 
+   2:Core/Src/tetromino.c **** 
+   3:Core/Src/tetromino.c **** #include "tetromino.h"
+   4:Core/Src/tetromino.c **** 
+   5:Core/Src/tetromino.c **** // Predefined tetromino shapes
+   6:Core/Src/tetromino.c **** int tetrominoShapes[TETROMINO_COUNT][TETROMINO_SIZE] = {
+   7:Core/Src/tetromino.c ****     {
+   8:Core/Src/tetromino.c ****     0, 0, 0, 0,
+   9:Core/Src/tetromino.c ****     1, 1, 1, 1,
+  10:Core/Src/tetromino.c ****     0, 0, 0, 0,
+  11:Core/Src/tetromino.c ****     0, 0, 0, 0
+  12:Core/Src/tetromino.c ****     },
+  13:Core/Src/tetromino.c ****     {
+  14:Core/Src/tetromino.c ****     0, 1, 0, 0,
+  15:Core/Src/tetromino.c ****     1, 1, 1, 0,
+  16:Core/Src/tetromino.c ****     0, 0, 0, 0,
+  17:Core/Src/tetromino.c ****     0, 0, 0, 0
+  18:Core/Src/tetromino.c ****     },
+  19:Core/Src/tetromino.c ****     {
+  20:Core/Src/tetromino.c ****     1, 1, 0, 0,
+  21:Core/Src/tetromino.c ****     1, 1, 0, 0,
+  22:Core/Src/tetromino.c ****     0, 0, 0, 0,
+  23:Core/Src/tetromino.c ****     0, 0, 0, 0
+  24:Core/Src/tetromino.c ****     },
+  25:Core/Src/tetromino.c ****     {
+  26:Core/Src/tetromino.c ****     1, 0, 0, 0,
+  27:Core/Src/tetromino.c ****     1, 1, 1, 0,
+  28:Core/Src/tetromino.c ****     0, 0, 0, 0,
+  29:Core/Src/tetromino.c ****     0, 0, 0, 0
+ARM GAS  /tmp/ccNZ5cmI.s 			page 2
+
+
+  30:Core/Src/tetromino.c ****     },
+  31:Core/Src/tetromino.c ****     {
+  32:Core/Src/tetromino.c ****     0, 0, 1, 0,
+  33:Core/Src/tetromino.c ****     1, 1, 1, 0,
+  34:Core/Src/tetromino.c ****     0, 0, 0, 0,
+  35:Core/Src/tetromino.c ****     0, 0, 0, 0
+  36:Core/Src/tetromino.c ****     },
+  37:Core/Src/tetromino.c ****     {
+  38:Core/Src/tetromino.c ****     0, 1, 1, 0,
+  39:Core/Src/tetromino.c ****     1, 1, 0, 0,
+  40:Core/Src/tetromino.c ****     0, 0, 0, 0,
+  41:Core/Src/tetromino.c ****     0, 0, 0, 0
+  42:Core/Src/tetromino.c ****     },
+  43:Core/Src/tetromino.c ****     {
+  44:Core/Src/tetromino.c ****     1, 1, 0, 0,
+  45:Core/Src/tetromino.c ****     0, 1, 1, 0,
+  46:Core/Src/tetromino.c ****     0, 0, 0, 0,
+  47:Core/Src/tetromino.c ****     0, 0, 0, 0
+  48:Core/Src/tetromino.c ****     }   
+  49:Core/Src/tetromino.c **** };
+  50:Core/Src/tetromino.c **** 
+  51:Core/Src/tetromino.c **** int rotateTetromino(int x, int y, int r) {
+  30              		.loc 1 51 42 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  52:Core/Src/tetromino.c ****     switch (r % 4) {
+  35              		.loc 1 52 5 view .LVU1
+  36              		.loc 1 52 15 is_stmt 0 view .LVU2
+  37 0000 5342     		rsbs	r3, r2, #0
+  38 0002 02F00302 		and	r2, r2, #3
+  39              	.LVL1:
+  40              		.loc 1 52 15 view .LVU3
+  41 0006 03F00303 		and	r3, r3, #3
+  42 000a 58BF     		it	pl
+  43 000c 5A42     		rsbpl	r2, r3, #0
+  44              		.loc 1 52 5 view .LVU4
+  45 000e 032A     		cmp	r2, #3
+  46 0010 14D8     		bhi	.L8
+  47 0012 DFE802F0 		tbb	[pc, r2]
+  48              	.L4:
+  49 0016 02       		.byte	(.L7-.L4)/2
+  50 0017 05       		.byte	(.L6-.L4)/2
+  51 0018 09       		.byte	(.L5-.L4)/2
+  52 0019 0E       		.byte	(.L3-.L4)/2
+  53              		.p2align 1
+  54              	.L7:
+  53:Core/Src/tetromino.c ****         case 0: return (y * 4) + x; //0
+  55              		.loc 1 53 17 is_stmt 1 view .LVU5
+  56              		.loc 1 53 32 is_stmt 0 view .LVU6
+  57 001a 00EB8100 		add	r0, r0, r1, lsl #2
+  58              	.LVL2:
+  59              		.loc 1 53 32 view .LVU7
+  60 001e 7047     		bx	lr
+  61              	.LVL3:
+  62              	.L6:
+ARM GAS  /tmp/ccNZ5cmI.s 			page 3
+
+
+  54:Core/Src/tetromino.c ****         case 1: return 12 + y - (x * 4); //90
+  63              		.loc 1 54 17 is_stmt 1 view .LVU8
+  64              		.loc 1 54 27 is_stmt 0 view .LVU9
+  65 0020 0C31     		adds	r1, r1, #12
+  66              	.LVL4:
+  67              		.loc 1 54 31 view .LVU10
+  68 0022 A1EB8000 		sub	r0, r1, r0, lsl #2
+  69              	.LVL5:
+  70              		.loc 1 54 31 view .LVU11
+  71 0026 7047     		bx	lr
+  72              	.LVL6:
+  73              	.L5:
+  55:Core/Src/tetromino.c ****         case 2: return 15 - (y * 4) - x; //180
+  74              		.loc 1 55 17 is_stmt 1 view .LVU12
+  75              		.loc 1 55 32 is_stmt 0 view .LVU13
+  76 0028 8900     		lsls	r1, r1, #2
+  77              	.LVL7:
+  78              		.loc 1 55 27 view .LVU14
+  79 002a C1F10F01 		rsb	r1, r1, #15
+  80              		.loc 1 55 37 view .LVU15
+  81 002e 081A     		subs	r0, r1, r0
+  82              	.LVL8:
+  83              		.loc 1 55 37 view .LVU16
+  84 0030 7047     		bx	lr
+  85              	.LVL9:
+  86              	.L3:
+  56:Core/Src/tetromino.c ****         case 3: return 3 - y + (x * 4); //270
+  87              		.loc 1 56 17 is_stmt 1 view .LVU17
+  88              		.loc 1 56 26 is_stmt 0 view .LVU18
+  89 0032 C1F10301 		rsb	r1, r1, #3
+  90              	.LVL10:
+  91              		.loc 1 56 30 view .LVU19
+  92 0036 01EB8000 		add	r0, r1, r0, lsl #2
+  93              	.LVL11:
+  94              		.loc 1 56 30 view .LVU20
+  95 003a 7047     		bx	lr
+  96              	.LVL12:
+  97              	.L8:
+  52:Core/Src/tetromino.c ****         case 0: return (y * 4) + x; //0
+  98              		.loc 1 52 5 view .LVU21
+  99 003c 0020     		movs	r0, #0
+ 100              	.LVL13:
+  57:Core/Src/tetromino.c ****     }
+  58:Core/Src/tetromino.c ****     return 0;
+  59:Core/Src/tetromino.c **** }
+ 101              		.loc 1 59 1 view .LVU22
+ 102 003e 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE329:
+ 106              		.section	.text.generateTetromino,"ax",%progbits
+ 107              		.align	1
+ 108              		.global	generateTetromino
+ 109              		.syntax unified
+ 110              		.thumb
+ 111              		.thumb_func
+ 113              	generateTetromino:
+ 114              	.LVL14:
+ARM GAS  /tmp/ccNZ5cmI.s 			page 4
+
+
+ 115              	.LFB330:
+  60:Core/Src/tetromino.c **** 
+  61:Core/Src/tetromino.c **** 
+  62:Core/Src/tetromino.c **** Tetromino generateTetromino(int s, int r, int p) {
+ 116              		.loc 1 62 50 is_stmt 1 view -0
+ 117              		.cfi_startproc
+ 118              		@ args = 0, pretend = 0, frame = 0
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120              		.loc 1 62 50 is_stmt 0 view .LVU24
+ 121 0000 30B5     		push	{r4, r5, lr}
+ 122              	.LCFI0:
+ 123              		.cfi_def_cfa_offset 12
+ 124              		.cfi_offset 4, -12
+ 125              		.cfi_offset 5, -8
+ 126              		.cfi_offset 14, -4
+ 127 0002 0025     		movs	r5, #0
+  63:Core/Src/tetromino.c ****     Tetromino tetromino;
+ 128              		.loc 1 63 5 is_stmt 1 view .LVU25
+  64:Core/Src/tetromino.c ****     uint16_t c;
+ 129              		.loc 1 64 5 view .LVU26
+  65:Core/Src/tetromino.c ****     switch (s) {
+ 130              		.loc 1 65 5 view .LVU27
+ 131 0004 0629     		cmp	r1, #6
+ 132 0006 09D8     		bhi	.L10
+ 133 0008 DFE801F0 		tbb	[pc, r1]
+ 134              	.L12:
+ 135 000c 04       		.byte	(.L18-.L12)/2
+ 136 000d 0B       		.byte	(.L17-.L12)/2
+ 137 000e 10       		.byte	(.L16-.L12)/2
+ 138 000f 15       		.byte	(.L15-.L12)/2
+ 139 0010 19       		.byte	(.L14-.L12)/2
+ 140 0011 1E       		.byte	(.L13-.L12)/2
+ 141 0012 23       		.byte	(.L11-.L12)/2
+ 142 0013 00       		.p2align 1
+ 143              	.L18:
+  66:Core/Src/tetromino.c ****             case 0:
+  67:Core/Src/tetromino.c ****             	c = C_CYAN;
+ 144              		.loc 1 67 14 view .LVU28
+ 145              	.LVL15:
+  68:Core/Src/tetromino.c ****             	tetromino.shape = 'I';
+ 146              		.loc 1 68 14 view .LVU29
+ 147              		.loc 1 68 30 is_stmt 0 view .LVU30
+ 148 0014 4924     		movs	r4, #73
+ 149 0016 0471     		strb	r4, [r0, #4]
+  69:Core/Src/tetromino.c ****             break;
+ 150              		.loc 1 69 13 is_stmt 1 view .LVU31
+  67:Core/Src/tetromino.c ****             	tetromino.shape = 'I';
+ 151              		.loc 1 67 16 is_stmt 0 view .LVU32
+ 152 0018 40F2FF75 		movw	r5, #2047
+ 153              	.LVL16:
+ 154              	.L10:
+  70:Core/Src/tetromino.c ****             case 1:
+  71:Core/Src/tetromino.c ****             	c = C_PURPLE;
+  72:Core/Src/tetromino.c ****             	tetromino.shape = 'T';
+  73:Core/Src/tetromino.c ****             break;
+  74:Core/Src/tetromino.c ****             case 2:
+  75:Core/Src/tetromino.c ****             	c = C_YELLOW;
+ARM GAS  /tmp/ccNZ5cmI.s 			page 5
+
+
+  76:Core/Src/tetromino.c ****             	tetromino.shape = 'O';
+  77:Core/Src/tetromino.c ****             	break;
+  78:Core/Src/tetromino.c ****             case 3:
+  79:Core/Src/tetromino.c ****             	c = C_BLUE;
+  80:Core/Src/tetromino.c ****             	tetromino.shape = 'J';
+  81:Core/Src/tetromino.c ****             	break;
+  82:Core/Src/tetromino.c ****             case 4:
+  83:Core/Src/tetromino.c ****             	c = C_ORANGE;
+  84:Core/Src/tetromino.c ****             	tetromino.shape = 'L';
+  85:Core/Src/tetromino.c ****             	break;
+  86:Core/Src/tetromino.c ****             case 5:
+  87:Core/Src/tetromino.c ****             	c = C_GREEN;
+  88:Core/Src/tetromino.c ****             	tetromino.shape = 'S';
+  89:Core/Src/tetromino.c ****             	break;
+  90:Core/Src/tetromino.c ****             case 6:
+  91:Core/Src/tetromino.c ****             	c = C_RED;
+  92:Core/Src/tetromino.c ****             	tetromino.shape = 'Z';
+  93:Core/Src/tetromino.c ****             	break;
+  94:Core/Src/tetromino.c ****         }
+  95:Core/Src/tetromino.c **** 
+  96:Core/Src/tetromino.c ****     for (int i = 0; i < 16; i++) {
+ 155              		.loc 1 96 5 is_stmt 1 view .LVU33
+ 156              	.LBB2:
+ 157              		.loc 1 96 10 view .LVU34
+ 158              		.loc 1 96 14 is_stmt 0 view .LVU35
+ 159 001c 4FF0000C 		mov	ip, #0
+ 160              		.loc 1 96 5 view .LVU36
+ 161 0020 23E0     		b	.L19
+ 162              	.LVL17:
+ 163              	.L17:
+ 164              		.loc 1 96 5 view .LVU37
+ 165              	.LBE2:
+  71:Core/Src/tetromino.c ****             	tetromino.shape = 'T';
+ 166              		.loc 1 71 14 is_stmt 1 view .LVU38
+  72:Core/Src/tetromino.c ****             break;
+ 167              		.loc 1 72 14 view .LVU39
+  72:Core/Src/tetromino.c ****             break;
+ 168              		.loc 1 72 30 is_stmt 0 view .LVU40
+ 169 0022 5424     		movs	r4, #84
+ 170 0024 0471     		strb	r4, [r0, #4]
+  73:Core/Src/tetromino.c ****             case 2:
+ 171              		.loc 1 73 13 is_stmt 1 view .LVU41
+  71:Core/Src/tetromino.c ****             	tetromino.shape = 'T';
+ 172              		.loc 1 71 16 is_stmt 0 view .LVU42
+ 173 0026 48F21005 		movw	r5, #32784
+  73:Core/Src/tetromino.c ****             case 2:
+ 174              		.loc 1 73 13 view .LVU43
+ 175 002a F7E7     		b	.L10
+ 176              	.LVL18:
+ 177              	.L16:
+  75:Core/Src/tetromino.c ****             	tetromino.shape = 'O';
+ 178              		.loc 1 75 14 is_stmt 1 view .LVU44
+  76:Core/Src/tetromino.c ****             	break;
+ 179              		.loc 1 76 14 view .LVU45
+  76:Core/Src/tetromino.c ****             	break;
+ 180              		.loc 1 76 30 is_stmt 0 view .LVU46
+ 181 002c 4F24     		movs	r4, #79
+ARM GAS  /tmp/ccNZ5cmI.s 			page 6
+
+
+ 182 002e 0471     		strb	r4, [r0, #4]
+  77:Core/Src/tetromino.c ****             case 3:
+ 183              		.loc 1 77 14 is_stmt 1 view .LVU47
+  75:Core/Src/tetromino.c ****             	tetromino.shape = 'O';
+ 184              		.loc 1 75 16 is_stmt 0 view .LVU48
+ 185 0030 4FF6E075 		movw	r5, #65504
+  77:Core/Src/tetromino.c ****             case 3:
+ 186              		.loc 1 77 14 view .LVU49
+ 187 0034 F2E7     		b	.L10
+ 188              	.LVL19:
+ 189              	.L15:
+  79:Core/Src/tetromino.c ****             	tetromino.shape = 'J';
+ 190              		.loc 1 79 14 is_stmt 1 view .LVU50
+  80:Core/Src/tetromino.c ****             	break;
+ 191              		.loc 1 80 14 view .LVU51
+  80:Core/Src/tetromino.c ****             	break;
+ 192              		.loc 1 80 30 is_stmt 0 view .LVU52
+ 193 0036 4A24     		movs	r4, #74
+ 194 0038 0471     		strb	r4, [r0, #4]
+  81:Core/Src/tetromino.c ****             case 4:
+ 195              		.loc 1 81 14 is_stmt 1 view .LVU53
+  79:Core/Src/tetromino.c ****             	tetromino.shape = 'J';
+ 196              		.loc 1 79 16 is_stmt 0 view .LVU54
+ 197 003a 1F25     		movs	r5, #31
+  81:Core/Src/tetromino.c ****             case 4:
+ 198              		.loc 1 81 14 view .LVU55
+ 199 003c EEE7     		b	.L10
+ 200              	.LVL20:
+ 201              	.L14:
+  83:Core/Src/tetromino.c ****             	tetromino.shape = 'L';
+ 202              		.loc 1 83 14 is_stmt 1 view .LVU56
+  84:Core/Src/tetromino.c ****             	break;
+ 203              		.loc 1 84 14 view .LVU57
+  84:Core/Src/tetromino.c ****             	break;
+ 204              		.loc 1 84 30 is_stmt 0 view .LVU58
+ 205 003e 4C24     		movs	r4, #76
+ 206 0040 0471     		strb	r4, [r0, #4]
+  85:Core/Src/tetromino.c ****             case 5:
+ 207              		.loc 1 85 14 is_stmt 1 view .LVU59
+  83:Core/Src/tetromino.c ****             	tetromino.shape = 'L';
+ 208              		.loc 1 83 16 is_stmt 0 view .LVU60
+ 209 0042 4FF62055 		movw	r5, #64800
+  85:Core/Src/tetromino.c ****             case 5:
+ 210              		.loc 1 85 14 view .LVU61
+ 211 0046 E9E7     		b	.L10
+ 212              	.LVL21:
+ 213              	.L13:
+  87:Core/Src/tetromino.c ****             	tetromino.shape = 'S';
+ 214              		.loc 1 87 14 is_stmt 1 view .LVU62
+  88:Core/Src/tetromino.c ****             	break;
+ 215              		.loc 1 88 14 view .LVU63
+  88:Core/Src/tetromino.c ****             	break;
+ 216              		.loc 1 88 30 is_stmt 0 view .LVU64
+ 217 0048 5324     		movs	r4, #83
+ 218 004a 0471     		strb	r4, [r0, #4]
+  89:Core/Src/tetromino.c ****             case 6:
+ 219              		.loc 1 89 14 is_stmt 1 view .LVU65
+ARM GAS  /tmp/ccNZ5cmI.s 			page 7
+
+
+  87:Core/Src/tetromino.c ****             	tetromino.shape = 'S';
+ 220              		.loc 1 87 16 is_stmt 0 view .LVU66
+ 221 004c 4FF4FC65 		mov	r5, #2016
+  89:Core/Src/tetromino.c ****             case 6:
+ 222              		.loc 1 89 14 view .LVU67
+ 223 0050 E4E7     		b	.L10
+ 224              	.LVL22:
+ 225              	.L11:
+  91:Core/Src/tetromino.c ****             	tetromino.shape = 'Z';
+ 226              		.loc 1 91 14 is_stmt 1 view .LVU68
+  92:Core/Src/tetromino.c ****             	break;
+ 227              		.loc 1 92 14 view .LVU69
+  92:Core/Src/tetromino.c ****             	break;
+ 228              		.loc 1 92 30 is_stmt 0 view .LVU70
+ 229 0052 5A24     		movs	r4, #90
+ 230 0054 0471     		strb	r4, [r0, #4]
+  93:Core/Src/tetromino.c ****         }
+ 231              		.loc 1 93 14 is_stmt 1 view .LVU71
+  91:Core/Src/tetromino.c ****             	tetromino.shape = 'Z';
+ 232              		.loc 1 91 16 is_stmt 0 view .LVU72
+ 233 0056 4FF47845 		mov	r5, #63488
+  93:Core/Src/tetromino.c ****         }
+ 234              		.loc 1 93 14 view .LVU73
+ 235 005a DFE7     		b	.L10
+ 236              	.LVL23:
+ 237              	.L20:
+ 238              	.LBB3:
+  97:Core/Src/tetromino.c ****     	if (tetrominoShapes[s][i] == 1) {
+  98:Core/Src/tetromino.c ****     		tetromino.grid[i] = c;
+  99:Core/Src/tetromino.c ****     	}
+ 100:Core/Src/tetromino.c ****     	else tetromino.grid[i] = 0;
+ 239              		.loc 1 100 11 is_stmt 1 view .LVU74
+ 240              		.loc 1 100 29 is_stmt 0 view .LVU75
+ 241 005c 00EB4C0E 		add	lr, r0, ip, lsl #1
+ 242 0060 0024     		movs	r4, #0
+ 243 0062 AEF80640 		strh	r4, [lr, #6]	@ movhi
+ 244              	.L21:
+  96:Core/Src/tetromino.c ****     	if (tetrominoShapes[s][i] == 1) {
+ 245              		.loc 1 96 29 is_stmt 1 discriminator 2 view .LVU76
+  96:Core/Src/tetromino.c ****     	if (tetrominoShapes[s][i] == 1) {
+ 246              		.loc 1 96 30 is_stmt 0 discriminator 2 view .LVU77
+ 247 0066 0CF1010C 		add	ip, ip, #1
+ 248              	.LVL24:
+ 249              	.L19:
+  96:Core/Src/tetromino.c ****     	if (tetrominoShapes[s][i] == 1) {
+ 250              		.loc 1 96 21 is_stmt 1 discriminator 1 view .LVU78
+  96:Core/Src/tetromino.c ****     	if (tetrominoShapes[s][i] == 1) {
+ 251              		.loc 1 96 5 is_stmt 0 discriminator 1 view .LVU79
+ 252 006a BCF10F0F 		cmp	ip, #15
+ 253 006e 0ADC     		bgt	.L24
+  97:Core/Src/tetromino.c ****     	if (tetrominoShapes[s][i] == 1) {
+ 254              		.loc 1 97 6 is_stmt 1 view .LVU80
+  97:Core/Src/tetromino.c ****     	if (tetrominoShapes[s][i] == 1) {
+ 255              		.loc 1 97 28 is_stmt 0 view .LVU81
+ 256 0070 0CEB011E 		add	lr, ip, r1, lsl #4
+ 257 0074 064C     		ldr	r4, .L25
+ 258 0076 54F82E40 		ldr	r4, [r4, lr, lsl #2]
+ARM GAS  /tmp/ccNZ5cmI.s 			page 8
+
+
+  97:Core/Src/tetromino.c ****     	if (tetrominoShapes[s][i] == 1) {
+ 259              		.loc 1 97 9 view .LVU82
+ 260 007a 012C     		cmp	r4, #1
+ 261 007c EED1     		bne	.L20
+  98:Core/Src/tetromino.c ****     	}
+ 262              		.loc 1 98 7 is_stmt 1 view .LVU83
+  98:Core/Src/tetromino.c ****     	}
+ 263              		.loc 1 98 25 is_stmt 0 view .LVU84
+ 264 007e 00EB4C04 		add	r4, r0, ip, lsl #1
+ 265 0082 E580     		strh	r5, [r4, #6]	@ movhi
+ 266 0084 EFE7     		b	.L21
+ 267              	.L24:
+  98:Core/Src/tetromino.c ****     	}
+ 268              		.loc 1 98 25 view .LVU85
+ 269              	.LBE3:
+ 101:Core/Src/tetromino.c ****     }
+ 102:Core/Src/tetromino.c **** 
+ 103:Core/Src/tetromino.c ****     tetromino.x = p;
+ 270              		.loc 1 103 5 is_stmt 1 view .LVU86
+ 271              		.loc 1 103 17 is_stmt 0 view .LVU87
+ 272 0086 8362     		str	r3, [r0, #40]
+ 104:Core/Src/tetromino.c ****     tetromino.y = 0;
+ 273              		.loc 1 104 5 is_stmt 1 view .LVU88
+ 274              		.loc 1 104 17 is_stmt 0 view .LVU89
+ 275 0088 0023     		movs	r3, #0
+ 276              	.LVL25:
+ 277              		.loc 1 104 17 view .LVU90
+ 278 008a C362     		str	r3, [r0, #44]
+ 105:Core/Src/tetromino.c ****     tetromino.rotation = r;
+ 279              		.loc 1 105 5 is_stmt 1 view .LVU91
+ 280              		.loc 1 105 24 is_stmt 0 view .LVU92
+ 281 008c 0260     		str	r2, [r0]
+ 106:Core/Src/tetromino.c ****     return tetromino;
+ 282              		.loc 1 106 5 is_stmt 1 view .LVU93
+ 107:Core/Src/tetromino.c **** }
+ 283              		.loc 1 107 1 is_stmt 0 view .LVU94
+ 284 008e 30BD     		pop	{r4, r5, pc}
+ 285              	.LVL26:
+ 286              	.L26:
+ 287              		.loc 1 107 1 view .LVU95
+ 288              		.align	2
+ 289              	.L25:
+ 290 0090 00000000 		.word	.LANCHOR0
+ 291              		.cfi_endproc
+ 292              	.LFE330:
+ 294              		.global	tetrominoShapes
+ 295              		.section	.data.tetrominoShapes,"aw"
+ 296              		.align	2
+ 297              		.set	.LANCHOR0,. + 0
+ 300              	tetrominoShapes:
+ 301 0000 00000000 		.word	0
+ 302 0004 00000000 		.word	0
+ 303 0008 00000000 		.word	0
+ 304 000c 00000000 		.word	0
+ 305 0010 01000000 		.word	1
+ 306 0014 01000000 		.word	1
+ 307 0018 01000000 		.word	1
+ARM GAS  /tmp/ccNZ5cmI.s 			page 9
+
+
+ 308 001c 01000000 		.word	1
+ 309 0020 00000000 		.word	0
+ 310 0024 00000000 		.word	0
+ 311 0028 00000000 		.word	0
+ 312 002c 00000000 		.word	0
+ 313 0030 00000000 		.word	0
+ 314 0034 00000000 		.word	0
+ 315 0038 00000000 		.word	0
+ 316 003c 00000000 		.word	0
+ 317 0040 00000000 		.word	0
+ 318 0044 01000000 		.word	1
+ 319 0048 00000000 		.word	0
+ 320 004c 00000000 		.word	0
+ 321 0050 01000000 		.word	1
+ 322 0054 01000000 		.word	1
+ 323 0058 01000000 		.word	1
+ 324 005c 00000000 		.word	0
+ 325 0060 00000000 		.word	0
+ 326 0064 00000000 		.word	0
+ 327 0068 00000000 		.word	0
+ 328 006c 00000000 		.word	0
+ 329 0070 00000000 		.word	0
+ 330 0074 00000000 		.word	0
+ 331 0078 00000000 		.word	0
+ 332 007c 00000000 		.word	0
+ 333 0080 01000000 		.word	1
+ 334 0084 01000000 		.word	1
+ 335 0088 00000000 		.word	0
+ 336 008c 00000000 		.word	0
+ 337 0090 01000000 		.word	1
+ 338 0094 01000000 		.word	1
+ 339 0098 00000000 		.word	0
+ 340 009c 00000000 		.word	0
+ 341 00a0 00000000 		.word	0
+ 342 00a4 00000000 		.word	0
+ 343 00a8 00000000 		.word	0
+ 344 00ac 00000000 		.word	0
+ 345 00b0 00000000 		.word	0
+ 346 00b4 00000000 		.word	0
+ 347 00b8 00000000 		.word	0
+ 348 00bc 00000000 		.word	0
+ 349 00c0 01000000 		.word	1
+ 350 00c4 00000000 		.word	0
+ 351 00c8 00000000 		.word	0
+ 352 00cc 00000000 		.word	0
+ 353 00d0 01000000 		.word	1
+ 354 00d4 01000000 		.word	1
+ 355 00d8 01000000 		.word	1
+ 356 00dc 00000000 		.word	0
+ 357 00e0 00000000 		.word	0
+ 358 00e4 00000000 		.word	0
+ 359 00e8 00000000 		.word	0
+ 360 00ec 00000000 		.word	0
+ 361 00f0 00000000 		.word	0
+ 362 00f4 00000000 		.word	0
+ 363 00f8 00000000 		.word	0
+ 364 00fc 00000000 		.word	0
+ARM GAS  /tmp/ccNZ5cmI.s 			page 10
+
+
+ 365 0100 00000000 		.word	0
+ 366 0104 00000000 		.word	0
+ 367 0108 01000000 		.word	1
+ 368 010c 00000000 		.word	0
+ 369 0110 01000000 		.word	1
+ 370 0114 01000000 		.word	1
+ 371 0118 01000000 		.word	1
+ 372 011c 00000000 		.word	0
+ 373 0120 00000000 		.word	0
+ 374 0124 00000000 		.word	0
+ 375 0128 00000000 		.word	0
+ 376 012c 00000000 		.word	0
+ 377 0130 00000000 		.word	0
+ 378 0134 00000000 		.word	0
+ 379 0138 00000000 		.word	0
+ 380 013c 00000000 		.word	0
+ 381 0140 00000000 		.word	0
+ 382 0144 01000000 		.word	1
+ 383 0148 01000000 		.word	1
+ 384 014c 00000000 		.word	0
+ 385 0150 01000000 		.word	1
+ 386 0154 01000000 		.word	1
+ 387 0158 00000000 		.word	0
+ 388 015c 00000000 		.word	0
+ 389 0160 00000000 		.word	0
+ 390 0164 00000000 		.word	0
+ 391 0168 00000000 		.word	0
+ 392 016c 00000000 		.word	0
+ 393 0170 00000000 		.word	0
+ 394 0174 00000000 		.word	0
+ 395 0178 00000000 		.word	0
+ 396 017c 00000000 		.word	0
+ 397 0180 01000000 		.word	1
+ 398 0184 01000000 		.word	1
+ 399 0188 00000000 		.word	0
+ 400 018c 00000000 		.word	0
+ 401 0190 00000000 		.word	0
+ 402 0194 01000000 		.word	1
+ 403 0198 01000000 		.word	1
+ 404 019c 00000000 		.word	0
+ 405 01a0 00000000 		.word	0
+ 406 01a4 00000000 		.word	0
+ 407 01a8 00000000 		.word	0
+ 408 01ac 00000000 		.word	0
+ 409 01b0 00000000 		.word	0
+ 410 01b4 00000000 		.word	0
+ 411 01b8 00000000 		.word	0
+ 412 01bc 00000000 		.word	0
+ 413              		.text
+ 414              	.Letext0:
+ 415              		.file 2 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/machine/_default_types.h"
+ 416              		.file 3 "/usr/share/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_stdint.h"
+ 417              		.file 4 "Core/Inc/tetromino.h"
+ARM GAS  /tmp/ccNZ5cmI.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 tetromino.c
+     /tmp/ccNZ5cmI.s:20     .text.rotateTetromino:0000000000000000 $t
+     /tmp/ccNZ5cmI.s:26     .text.rotateTetromino:0000000000000000 rotateTetromino
+     /tmp/ccNZ5cmI.s:49     .text.rotateTetromino:0000000000000016 $d
+     /tmp/ccNZ5cmI.s:53     .text.rotateTetromino:000000000000001a $t
+     /tmp/ccNZ5cmI.s:107    .text.generateTetromino:0000000000000000 $t
+     /tmp/ccNZ5cmI.s:113    .text.generateTetromino:0000000000000000 generateTetromino
+     /tmp/ccNZ5cmI.s:135    .text.generateTetromino:000000000000000c $d
+     /tmp/ccNZ5cmI.s:290    .text.generateTetromino:0000000000000090 $d
+     /tmp/ccNZ5cmI.s:300    .data.tetrominoShapes:0000000000000000 tetrominoShapes
+     /tmp/ccNZ5cmI.s:296    .data.tetrominoShapes:0000000000000000 $d
+     /tmp/ccNZ5cmI.s:142    .text.generateTetromino:0000000000000013 $d
+     /tmp/ccNZ5cmI.s:142    .text.generateTetromino:0000000000000014 $t
+
+NO UNDEFINED SYMBOLS
