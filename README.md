@@ -185,7 +185,7 @@ int collisions(Tetromino t, int tx, int ty, int rotation) {
 ### Main loop
 
 The main loop has 3 game states: start, game and game over.
-The game loop checks user input, updates tetris rotation and position, checks for collisions and displays the new frame. The game loop, along with other funtions is implemented in tetris_game.c file.
+The game loop checks user input, updates tetris rotation and position, checks for collisions and displays the new frame. The game loop, along with other funtions is implemented in `tetris_game.c` file.
 
 ## Future plans
 
