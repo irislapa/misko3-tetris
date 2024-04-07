@@ -173,7 +173,7 @@ int collisions(Tetromino t, int tx, int ty, int rotation) {
           if (tValue != 0 && fieldArray[fieldIndex] != 0) {
             // we get collision
             return 1;
-					}
+	  }
         }
       }
     }
