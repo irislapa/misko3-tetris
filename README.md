@@ -1,6 +1,7 @@
 
 # Miško3 Tetris Game
 This is a repository for a simple Tetris game implemented in C programming language on Miško3 - a custom arm embeded system with stm32g474 microcontroller.
+You can watch the filmed demo on [youtube](https://www.youtube.com/watch?v=OU4xcbiVv8w)
 
 ## Table of Contents
 
