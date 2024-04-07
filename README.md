@@ -158,7 +158,7 @@ When iterating through tetromino array, the function will return the index coree
 ### Collisions
 The playfield is a [35x25] matrix, where 10x10 pixels are used to display each tetromino cell.
 When a tetromino "lands" on the ground, the cells are copied to the field array.
-![](images/collisions.png)
+![](images/collisions-dark.png)
 
 To caclulate collisions, the function iterates over the tetromino array and checks if the cell and the field are both occupied.
 
