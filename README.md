@@ -43,7 +43,7 @@ sudo apt-get install make
 sudo apt-get install cmake # for building stlink
 ```
 Download the [arm toolchain](https://developer.arm.com/downloads/-/gnu-rm) archive for your system.
-The workspace path is set up for it to be installed in /usr/share, you can install it elsewhere, but
+The workspace path is set up for it to be installed in `/usr/share`, you can install it elsewhere, but
 you will have to change the hardcoded path in the .json files, 
 ```bash
 sudo tar -xvjf /Downloads/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 -C /usr/share
@@ -57,11 +57,11 @@ sudo ln -s /usr/share/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc arm-n
 
 To flash the board you will need to install the stlink tool, you can do so by cloning or downloading the [repo](https://github.com/stlink-org/stlink):
 
-You want to extract/instal the contents of repo to /usr/local/share/stlink:
+You want to extract/instal the contents of repo to `/usr/local/share/stlink`:
 ```bash
 sudo mv /Downloads/stlink-1.8.0 /usr/local/share/stlink
 ```
-Or adjust the hardcoded paths in launch and settings.json.
+Or adjust the hardcoded paths in `launch` and `settings.json`.
 
 Then run the following commands:
 ```bash
@@ -89,7 +89,7 @@ The vscode extension you want are:
 To use the generate code and gui setup feature from cubeIDE, you can install the [CubeMX](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) vscode extension.
 
 You are now all set for running and debugging the project.
-I have added tasks to conveniently build and flash the project, press ctrl+shift+p, select "Tasks: Run Task" and choose the task you want to run.
+I have added tasks to conveniently build and flash the project, press `ctrl+shift+p`, select `Tasks: Run Task` and choose the task you want to run.
 Or you can also just type:
 ```bash
 make # only build
@@ -100,7 +100,7 @@ If the build and/or flash is succesful, a green message will be printed in the t
 ### CubeIDE
 I didn't use windows for this project, so i can't provide a guide to a working vscode setup on Windows, but you can still resort to using [CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html).
 You will have to first install [CubeMX](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and convert the toolchain/IDE configuration from makefile to STM32CubeIDE.
-You can do so by opening the project in CubeMX and under Project Manager -> Project -> Toolchain/IDE select STM32CubeIDE.
+You can do so by opening the project in CubeMX and under `Project Manager` -> `Project` -> `Toolchain/IDE` select `STM32CubeIDE`.
 ![](/images/image.png)
 Now you can flash and debug the project using CubeIDE.
 
